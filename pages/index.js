@@ -36,7 +36,7 @@ const Index = ({exploreData, cardsData}) => {
 						<ArrowCircleRightIcon className="h-5"/>
 						<p>Scroll to right</p>
 					</div>
-					<div className="cont flex scrollbar-hide overflow-x-scroll space-x-5" >
+					<div className="flex scrollbar-hide overflow-x-scroll space-x-5" >
 						{cardsData.map(item => (
 							<MediumCard key={item.title} img={item.img} title={item.title}/>
 						))}

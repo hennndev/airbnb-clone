@@ -2,3 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .button {
+        @apply py-2 px-3 text-sm border border-gray-200 rounded-full cursor-pointer hover:shadow-md hover:scale-105  hover:bg-gray-100 transition duration-200 ease-out whitespace-nowrap
+    }
+}
