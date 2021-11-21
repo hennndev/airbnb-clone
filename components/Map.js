@@ -1,11 +1,22 @@
 import React, { useState } from 'react'
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { XIcon } from '@heroicons/react/outline';
+import { getCenter } from 'geolib';
 
-const Map = ({handleClose}) => {
+
+const Map = ({handleClose, searchResult}) => {
+
+    const [showPopup, setShowPopup] = useState(null)
+    
+    const center = getCenter(searchResult.map(({long, lat}) => ({
+        longitude: long,
+        latitude: lat,
+    })))
+   //mengambil pusat dari sebuah lokasi, misal hari search purbalingga maka akan mereturn pusat kota /kab purbalingga. Tapi data dummy ini hanya mereturn kota london
+
     const [viewport, setViewport] = useState({
-        latitude: 37.7577,
-        longitude: -122.4376,
+        latitude: center.latitude,
+        longitude: center.longitude,
         zoom: 11,
         width:"100%",
         height:"100%"
@@ -23,7 +34,29 @@ const Map = ({handleClose}) => {
                     mapboxApiAccessToken={process.env.map_token}
                     {...viewport} 
                     onViewportChange={(viewport) => setViewport(viewport)}
-                ></ReactMapGL>
+                >
+                    {searchResult.map(result => (
+                        <div key={result.title}>
+                            <Marker
+                                longitude={result.long}
+                                latitude={result.lat}
+                                offsetLeft={-20}
+                                offsetTop={-10}
+                            >
+                                <p className="animate-bounce cursor-pointer text-xl" onClick={() => setShowPopup(result)}>📌</p>
+                            </Marker>
+                        </div>
+                    ))}
+                    {showPopup && <Popup
+                        latitude={showPopup.lat}
+                        longitude={showPopup.long}
+                        closeButton={true}
+                        closeOnClick={false}
+                        onClose={() => setShowPopup(null)}
+                        anchor="bottom" > 
+                        <p>{showPopup.title}</p>    
+                    </Popup>}
+                </ReactMapGL>
             </div>
         </div>
     )
