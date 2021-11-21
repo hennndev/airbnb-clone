@@ -6,7 +6,11 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         'location': 'repeat(auto-fill, minmax(180px, 1fr))'
-      }
+      },
+      backgroundColor: theme => ({
+        ...theme('colors'),
+        'overlay': 'rgba(0,0,0,0.6)'
+      })
     },
   },
   variants: {

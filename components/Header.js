@@ -69,7 +69,7 @@ const Header = ({resultPlaceholder = ''}) => {
             <div className="flex items-center justify-end text-gray-500 space-x-2">
                 <div className="flex items-center space-x-3 font-medium cursor-pointer">
                     <p className="hidden md:inline-flex">Become a host</p>
-                    <GlobeAltIcon className="h-4 md:h-5"/>
+                    <GlobeAltIcon className="h-4 md:h-5 animate-spin"/>
                 </div>
                 <div className="flex border-2 rounded-full px-2 py-1 space-x-2 cursor-pointer">
                     <MenuIcon className="h-4 md:h-5"/>
